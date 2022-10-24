@@ -1,0 +1,27 @@
+version: '3'
+
+services: 
+  database:
+    image: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    command: ['--character-set-server=utf8', '--collation-server=utf8_unicode_ci']
+    environment:
+      MYSQL_DATABASE: "mariadb"
+      MYSQL_USER: "mariadb"
+      MYSQL_PASSWORD: "mariadb"
+      MARIADB_ROOT_PASSWORD: "mariadb"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      retries: 10
+      interval: 3s
+      timeout: 30s
+
+  app:
+    build: .
+    ports:
+      - "5004:5004"
+    depends_on:
+      database:
+        condition: service_healthy
