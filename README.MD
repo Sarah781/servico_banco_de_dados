@@ -1,5 +1,4 @@
-# Um serviço web simples para inserção e listagem de itens em um banco de dados relacional (MariaDB/MySQL). Utiliza o framework TypeORM.
-
+# Serviço de Banco de Dados
 Para executar o sistema:
 
 * Clonar o repositório
