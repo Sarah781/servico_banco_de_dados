@@ -5,6 +5,15 @@ export class ProjetoService {
     async getAll() {
        return await MariaDBDataSource.manager.find(Projeto);
     }
+
+    async save(projeto: Projeto) {
+        const projetoSalvo = await MariaDBDataSource.manager.save(projeto);
+        return {sucess: true, projetoSalvo};
+    }
+
+    async delete(id: number) {
+        return await MariaDBDataSource.manager.delete(Projeto, {id});
+    }
 }
 
 export class PessoaService {
