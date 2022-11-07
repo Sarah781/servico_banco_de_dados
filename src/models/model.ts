@@ -1,4 +1,3 @@
-import internal = require("stream")
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity()

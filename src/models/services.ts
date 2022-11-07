@@ -1,5 +1,6 @@
 import { MariaDBDataSource } from "./data_source";
 import { Projeto, Pessoa } from "./model";
+import { Validator } from "./validator";
 
 export class ProjetoService {
     async getAll() {
@@ -7,6 +8,10 @@ export class ProjetoService {
     }
 
     async save(projeto: Projeto) {
+        const error = new Validator().validateNome(projeto.nome);
+        if (error)
+            return {sucess: false, error: error};
+
         const projetoSalvo = await MariaDBDataSource.manager.save(projeto);
         return {sucess: true, projetoSalvo};
     }
